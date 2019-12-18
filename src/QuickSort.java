@@ -1,5 +1,10 @@
-import java.util.Random;
-
+/**
+ * A simple quick sort example on integer arrays
+ *  
+ * @author Carl Atwell
+ * Date: 12/18/2019
+ *
+ */
 public class QuickSort {
 	
 	public void sort(int[] arr, int left, int right){

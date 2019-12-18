@@ -1,4 +1,9 @@
-
+/**
+ * A class implementing a simple bubble sort on integer arrays
+ * @author Carl Atwell
+ * Date: 12/18/2019
+ *
+ */
 public class BubbleSort {
 	
 	public void sort(int[] arr) {
