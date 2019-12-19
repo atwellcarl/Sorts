@@ -8,17 +8,24 @@ import java.util.Scanner;
  */
 public class Sorters {
 
+	/**
+	 * Main creates a sorter and calls method to get user input
+	 * @param args
+	 */
 	public static void main(String[] args) {
 		Sorters sorters = new Sorters();
 		Scanner scan = new Scanner(System.in);
-		System.out.println("__________Sorting Algorithms__________");
-		System.out.println("BubbleSort(ID = 1) QuickSort(ID = 2)");
+		System.out.println("__________________Sorting Algorithms_________________");
+		System.out.println("BubbleSort(ID = 1) QuickSort(ID = 2) MergeSort(ID = 3");
 		
 		sorters.getInput(scan);
 		System.out.println("Adios!");	
 	}
 	
-	
+	/**
+	 * Get user input for which sort to execute
+	 * @param scan: Scanner for console input
+	 */
 	private void getInput(Scanner scan) {
 		int id = -1 ;
 		System.out.println();
@@ -31,15 +38,22 @@ public class Sorters {
 			System.out.println("Invalid input");
 			return;
 		}
+		//0 to quit program
 		if(id == 0) {
 			scan.close();
 			return;
 		}
+		//execute a bubble sort
 		else if(id == 1) {
 			this.runBubbleSort(scan);
 		}
+		//execute a quicksort
 		else if(id == 2) {
 			this.runQuickSort(scan);
+		}
+		//execute a mergesort
+		else if(id == 3) {
+			this.runMergeSort(scan);
 		}
 		else{
 			System.out.println("Invalid input");
@@ -47,8 +61,15 @@ public class Sorters {
 		}
 	}
 
-
-	private void runQuickSort(Scanner scan) {
+	/**
+	 * Helper method for prompting the user for the legth of an array to sort
+	 * and calls a merge sort. once merge is done the user will be asked if the
+	 * array should be printed.
+	 * 
+	 * @param scan: Scanner for console input
+	 */
+	private void runMergeSort(Scanner scan) {
+		//get user input
 		System.out.print("How many to sort? ");
 		int length = 0;
 		if(scan.hasNextInt()) {
@@ -58,6 +79,38 @@ public class Sorters {
 			System.out.println("Invalid input");
 			return;
 		}
+		
+		//call the sort, verify order before and after sort
+		int[] arr = this.generate(length);
+		System.out.println("Array sorted = " + this.isSorted(arr));
+		MergeSort mergeSort = new MergeSort();
+		mergeSort.sort(arr);
+		System.out.println("Array Sorted = " + this.isSorted(arr));
+		
+		this.print(arr, scan);
+		this.getInput(scan);
+	}
+
+	/**
+	 * Helper method for running a quick sort. User is asked how mant 
+	 * integers to sort. After sorting the user is asked if the array
+	 * should be printed.
+	 * 
+	 * @param scan: Scanner for console input
+	 */
+	private void runQuickSort(Scanner scan) {
+		//Get user input
+		System.out.print("How many to sort? ");
+		int length = 0;
+		if(scan.hasNextInt()) {
+			length = scan.nextInt();
+		}
+		else {
+			System.out.println("Invalid input");
+			return;
+		}
+		
+		//Sort array. Verify before and after.
 		int[] arr = this.generate(length);
 		System.out.println("Array sorted = " + this.isSorted(arr));
 		QuickSort quickSort = new QuickSort();
@@ -68,8 +121,15 @@ public class Sorters {
 		
 	}
 
-
+	/**
+	 * Run a bubble sort. User is asked how many integers to sort before
+	 * sorting begins. After sorting, the user is asked if the array 
+	 * should be printed.
+	 * 
+	 * @param scan: Scanner for console input
+	 */
 	private void runBubbleSort(Scanner scan) {
+		//get user input
 		System.out.print("How many to sort? ");
 		int length = 0;
 		if(scan.hasNextInt()) {
@@ -79,6 +139,8 @@ public class Sorters {
 			System.out.println("Invalid input");
 			return;
 		}
+		
+		//Run sort
 		int[] arr = this.generate(length);
 		System.out.println("Array sorted = " + this.isSorted(arr));
 		BubbleSort bubbleSort = new BubbleSort();
@@ -88,7 +150,12 @@ public class Sorters {
 		this.getInput(scan);
 	}
 
-
+	/**
+	 * Ask user if the array should be printed. Prints array
+	 * if input is "yes"
+	 * @param arr: Array to print
+	 * @param scan: Scanner for console input
+	 */
 	private void print(int arr[], Scanner scan) {
 		
 		System.out.print("Would you like the array printed? (yes/no): ");
@@ -109,6 +176,11 @@ public class Sorters {
 		}
 	}
 	
+	/**
+	 * Uses Math.Random to create place integers in an array
+	 * @param length: length of the array
+	 * @return: Array filled with random integers.
+	 */
 	private int[] generate(int length) {
 		int arr[] = new int[length];
 		Random ran  = new Random();
@@ -118,6 +190,11 @@ public class Sorters {
 		return arr;		
 	}
 	
+	/**
+	 * Checks if an array is sorted
+	 * @param arr: Array to check order.
+	 * @return: Boolean true if array is sorted. False otherwise
+	 */
 	private boolean isSorted(int[] arr) {
 		boolean sorted = true;
 		
